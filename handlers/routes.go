@@ -18,7 +18,8 @@ func (app *Application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodDelete, "/categories/:id", app.deleteCategory)
 	// タグ
 	router.HandlerFunc(http.MethodGet, "/tags", app.getAllTags)
-	router.HandlerFunc(http.MethodGet, "/tags/:id", app.getOneTag)
 	router.HandlerFunc(http.MethodPost, "/tags", app.editTag)
+	router.HandlerFunc(http.MethodGet, "/tags/:id", app.getOneTag)
+	router.HandlerFunc(http.MethodDelete, "/tags/:id", app.deleteTag)
 	return router
 }

@@ -89,19 +89,6 @@ func (m *DBModel) TagCreate(tag Tag) error {
 	return nil
 }
 
-func (m *DBModel) countTagAll(tag Tag) (count int, err error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
-
-	query := `select count(*) from tags where tags.deleted_at is null`
-	row := m.DB.QueryRowContext(ctx, query)
-	err = row.Scan(&count)
-	if err != nil {
-		return count, err
-	}
-	return count + 1, nil
-}
-
 // update
 func (m *DBModel) TagUpdate(tag Tag) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
@@ -121,4 +108,59 @@ func (m *DBModel) TagUpdate(tag Tag) error {
 	}
 
 	return nil
+}
+
+// 削除
+func (m *DBModel) TagDelete(id int) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	tx, _ := m.DB.Begin()
+	defer func() {
+		// panicが起きたらロールバック
+		if recover() != nil {
+			tx.Rollback()
+		}
+	}()
+
+	query := `select position from tags where id = $1`
+	row := tx.QueryRowContext(ctx, query, id)
+
+	var t Tag
+	err := row.Scan(&t.Position)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	query = `update tags set position = null, deleted_at = NOW() where id = $1`
+	_, err = tx.ExecContext(ctx, query, id)
+	if err != nil {
+		tx.Rollback() // ロールバック
+		return err
+	}
+
+	query = `update tags set position = position - 1 where position > $1`
+	_, err = tx.ExecContext(ctx, query, t.Position)
+	if err != nil {
+		tx.Rollback() // ロールバック
+		return err
+	}
+	tx.Commit()
+
+	return nil
+}
+
+// Record Count
+func (m *DBModel) countTagAll(tag Tag) (count int, err error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `select count(*) from tags where tags.deleted_at is null`
+	row := m.DB.QueryRowContext(ctx, query)
+	err = row.Scan(&count)
+	if err != nil {
+		return count, err
+	}
+	return count + 1, nil
 }

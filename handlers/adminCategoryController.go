@@ -109,6 +109,7 @@ func (app *Application) editCategory(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// delete
 func (app *Application) deleteCategory(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 
