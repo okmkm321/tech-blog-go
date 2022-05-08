@@ -9,7 +9,7 @@ type Category struct {
 	ID        int         `json:"id"`
 	Name      string      `json:"name"`
 	Slug      string      `json:"slug"`
-	State     int         `json:"state"`
+	IsPublic  bool        `json:"is_public"`
 	Position  int         `json:"position"`
 	ParentId  interface{} `json:"parent_id"`
 	UpdatedAt time.Time   `json:"-"`
@@ -20,7 +20,7 @@ func (m *DBModel) CategoryGetAll() ([]*Category, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `select id, name, slug, state, position, parent_id from categories where categories.deleted_at is null order by position ASC`
+	query := `select id, name, slug, is_public, position, parent_id from categories where categories.deleted_at is null order by position ASC`
 
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
@@ -35,7 +35,7 @@ func (m *DBModel) CategoryGetAll() ([]*Category, error) {
 			&ctg.ID,
 			&ctg.Name,
 			&ctg.Slug,
-			&ctg.State,
+			&ctg.IsPublic,
 			&ctg.Position,
 			&ctg.ParentId,
 		)
@@ -61,6 +61,7 @@ func (m *DBModel) GetCategory(id int) (*Category, error) {
 		&ctg.ID,
 		&ctg.Name,
 		&ctg.Slug,
+		&ctg.IsPublic,
 		&ctg.Position,
 		&ctg.ParentId,
 	)
@@ -82,16 +83,16 @@ func (m *DBModel) CategoryCreate(category Category) error {
 		pi = category.ParentId
 	}
 
-	count, err := m.countAll(category)
+	count, err := m.countCategoryAll(category)
 	if err != nil {
 		return err
 	}
-	query := `insert into categories (name, slug, state, position, parent_id) values ($1, $2, $3, $4, $5)`
+	query := `insert into categories (name, slug, is_public, position, parent_id) values ($1, $2, $3, $4, $5)`
 
 	_, err = m.DB.ExecContext(ctx, query,
 		category.Name,
 		category.Slug,
-		category.State,
+		category.IsPublic,
 		count,
 		pi,
 	)
@@ -108,12 +109,12 @@ func (m *DBModel) CategoryUpdate(category Category) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `update categories set name = $1, slug = $2, state = $3, parent_id = $4, updated_at = $5 where id = $6`
+	query := `update categories set name = $1, slug = $2, is_public = $3, parent_id = $4, updated_at = $5 where id = $6`
 
 	_, err := m.DB.ExecContext(ctx, query,
 		category.Name,
 		category.Slug,
-		category.State,
+		category.IsPublic,
 		category.ParentId,
 		category.UpdatedAt,
 		category.ID,
@@ -168,7 +169,7 @@ func (m *DBModel) CategoryDelete(id int) error {
 }
 
 // Record Count
-func (m *DBModel) countAll(category Category) (count int, err error) {
+func (m *DBModel) countCategoryAll(category Category) (count int, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
