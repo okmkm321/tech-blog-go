@@ -7,18 +7,20 @@ import (
 	"net/http"
 	"project/tech-blog-go/models"
 	"strconv"
+	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 type CategoryPayload struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Slug     string `json:"slug"`
-	State    int    `json:"state"`
-	ParentId int    `json:"parent_id"`
+	ID       int         `json:"id"`
+	Name     string      `json:"name"`
+	Slug     string      `json:"slug"`
+	State    int         `json:"state"`
+	ParentId interface{} `json:"parent_id"`
 }
 
+// all
 func (app *Application) getAllCategories(w http.ResponseWriter, r *http.Request) {
 	ctg, err := app.Models.DB.CategoryGetAll()
 	if err != nil {
@@ -33,6 +35,7 @@ func (app *Application) getAllCategories(w http.ResponseWriter, r *http.Request)
 	}
 }
 
+// one
 func (app *Application) getOneCategory(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 
@@ -55,7 +58,8 @@ func (app *Application) getOneCategory(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (app *Application) insertCategory(w http.ResponseWriter, r *http.Request) {
+// create or update
+func (app *Application) editCategory(w http.ResponseWriter, r *http.Request) {
 	var cp CategoryPayload
 	err := json.NewDecoder(r.Body).Decode(&cp)
 	if err != nil {
@@ -65,14 +69,56 @@ func (app *Application) insertCategory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var cm models.Category
+
+	if cp.ID != 0 {
+		id := cp.ID
+		c, _ := app.Models.DB.GetCategory(id)
+		cm = *c
+		cm.UpdatedAt = time.Now()
+	}
+
+	cm.ID = cp.ID
 	cm.Name = cp.Name
 	cm.Slug = cp.Slug
 	cm.State = cp.State
 	cm.ParentId = cp.ParentId
-	// cm.State, _ = strconv.Atoi(cp.State)
-	// cm.ParentId, _ = strconv.Atoi(cp.ParentId)
+	cm.UpdatedAt = time.Now()
 
-	err = app.Models.DB.CategoryCreate(cm)
+	if cp.ID == 0 {
+		err = app.Models.DB.CategoryCreate(cm)
+		if err != nil {
+			app.ErrorJSON(w, err)
+			return
+		}
+	} else {
+		err = app.Models.DB.CategoryUpdate(cm)
+		if err != nil {
+			app.ErrorJSON(w, err)
+			return
+		}
+	}
+
+	ok := jsonResp{
+		OK: true,
+	}
+
+	err = app.WriteJSON(w, http.StatusOK, ok, "response")
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+}
+
+func (app *Application) deleteCategory(w http.ResponseWriter, r *http.Request) {
+	params := httprouter.ParamsFromContext(r.Context())
+
+	id, err := strconv.Atoi(params.ByName("id"))
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+
+	err = app.Models.DB.CategoryDelete(id)
 	if err != nil {
 		app.ErrorJSON(w, err)
 		return
