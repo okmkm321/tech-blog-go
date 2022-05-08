@@ -25,7 +25,7 @@ type Application struct {
 	Models models.Models
 }
 
-type jsonResp struct {
+type JsonResp struct {
 	OK      bool   `json:"ok"`
 	Message string `json:"message"`
 }

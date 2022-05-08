@@ -16,5 +16,9 @@ func (app *Application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPost, "/categories", app.editCategory)
 	router.HandlerFunc(http.MethodGet, "/categories/:id", app.getOneCategory)
 	router.HandlerFunc(http.MethodDelete, "/categories/:id", app.deleteCategory)
+	// タグ
+	router.HandlerFunc(http.MethodGet, "/tags", app.getAllTags)
+	router.HandlerFunc(http.MethodGet, "/tags/:id", app.getOneTag)
+	router.HandlerFunc(http.MethodPost, "/tags", app.editTag)
 	return router
 }

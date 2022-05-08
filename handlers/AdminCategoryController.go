@@ -16,7 +16,7 @@ type CategoryPayload struct {
 	ID       int         `json:"id"`
 	Name     string      `json:"name"`
 	Slug     string      `json:"slug"`
-	State    int         `json:"state"`
+	IsPublic bool        `json:"is_public"`
 	ParentId interface{} `json:"parent_id"`
 }
 
@@ -80,7 +80,7 @@ func (app *Application) editCategory(w http.ResponseWriter, r *http.Request) {
 	cm.ID = cp.ID
 	cm.Name = cp.Name
 	cm.Slug = cp.Slug
-	cm.State = cp.State
+	cm.IsPublic = cp.IsPublic
 	cm.ParentId = cp.ParentId
 	cm.UpdatedAt = time.Now()
 
@@ -98,7 +98,7 @@ func (app *Application) editCategory(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	ok := jsonResp{
+	ok := JsonResp{
 		OK: true,
 	}
 
@@ -124,7 +124,7 @@ func (app *Application) deleteCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ok := jsonResp{
+	ok := JsonResp{
 		OK: true,
 	}
 
