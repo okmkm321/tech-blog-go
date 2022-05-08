@@ -103,3 +103,27 @@ func (app *Application) editTag(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// delete
+func (app *Application) deleteTag(w http.ResponseWriter, r *http.Request) {
+	params := httprouter.ParamsFromContext(r.Context())
+	id, err := strconv.Atoi(params.ByName("id"))
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+	err = app.Models.DB.TagDelete(id)
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+	ok := JsonResp{
+		OK: true,
+	}
+
+	err = app.WriteJSON(w, http.StatusOK, ok, "response")
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+}
