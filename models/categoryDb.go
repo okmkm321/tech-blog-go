@@ -6,12 +6,13 @@ import (
 )
 
 type Category struct {
-	ID       int         `json:"id"`
-	Name     string      `json:"name"`
-	Slug     string      `json:"slug"`
-	State    int         `json:"state"`
-	Position int         `json:"position"`
-	ParentId interface{} `json:"ParentId"`
+	ID        int         `json:"id"`
+	Name      string      `json:"name"`
+	Slug      string      `json:"slug"`
+	State     int         `json:"state"`
+	Position  int         `json:"position"`
+	ParentId  interface{} `json:"parent_id"`
+	UpdatedAt time.Time   `json:"-"`
 }
 
 // All
@@ -19,7 +20,7 @@ func (m *DBModel) CategoryGetAll() ([]*Category, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `select id, name, slug, state, position, parent_id from categories order by position ASC`
+	query := `select id, name, slug, state, position, parent_id from categories where categories.deleted_at is null order by position ASC`
 
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
@@ -95,6 +96,43 @@ func (m *DBModel) CategoryCreate(category Category) error {
 		pi,
 	)
 
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// UPDATE
+func (m *DBModel) CategoryUpdate(category Category) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `update categories set name = $1, slug = $2, state = $3, parent_id = $4, updated_at = $5 where id = $6`
+
+	_, err := m.DB.ExecContext(ctx, query,
+		category.Name,
+		category.Slug,
+		category.State,
+		category.ParentId,
+		category.UpdatedAt,
+		category.ID,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// delete
+func (m *DBModel) CategoryDelete(id int) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `update categories set deleted_at = NOW() where id = $1`
+	_, err := m.DB.ExecContext(ctx, query, id)
 	if err != nil {
 		return err
 	}
