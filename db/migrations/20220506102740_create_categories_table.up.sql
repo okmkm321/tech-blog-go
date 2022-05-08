@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS categories
     name varchar(64) not null,
     slug varchar(64) not null unique,
     state integer not null default 0,
-    position int not null unique,
+    position int unique,
     parent_id integer default null,
     deleted_at timestamp default null,
     created_at timestamp not null default CURRENT_TIMESTAMP,

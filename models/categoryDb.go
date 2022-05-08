@@ -131,11 +131,38 @@ func (m *DBModel) CategoryDelete(id int) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `update categories set deleted_at = NOW() where id = $1`
-	_, err := m.DB.ExecContext(ctx, query, id)
+	tx, _ := m.DB.Begin()
+	defer func() {
+		// panicが起きたらロールバック
+		if recover() != nil {
+			tx.Rollback()
+		}
+	}()
+
+	query := `select position from categories where id = $1`
+	row := tx.QueryRowContext(ctx, query, id)
+
+	var ctg Category
+	err := row.Scan(&ctg.Position)
 	if err != nil {
+		tx.Rollback() // ロールバック
 		return err
 	}
+
+	query = `update categories set position = null, deleted_at = NOW() where id = $1`
+	_, err = tx.ExecContext(ctx, query, id)
+	if err != nil {
+		tx.Rollback() // ロールバック
+		return err
+	}
+
+	query = `update categories set position = position - 1 where position > $1`
+	_, err = tx.ExecContext(ctx, query, ctg.Position)
+	if err != nil {
+		tx.Rollback() // ロールバック
+		return err
+	}
+	tx.Commit()
 
 	return nil
 }

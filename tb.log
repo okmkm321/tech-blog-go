@@ -120,3 +120,63 @@ created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3071 +0x450
 2022/05/07 14:23:52 categoryController.go:23: json: cannot unmarshal number into Go struct field CategoryPayload.state of type string
 2022/05/07 14:24:36 categoryController.go:23: json: cannot unmarshal number into Go struct field CategoryPayload.state of type string
+2022/05/08 17:24:32 server.go:3197: http: panic serving [::1]:50366: runtime error: invalid memory address or nil pointer dereference
+goroutine 50 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x102a65e00, 0x102c3ac80})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editCategory(0x1400022a000, {0x102aac678, 0x1400022c0e0}, 0x1400023e100)
+	/Users/naof/go/src/project/tech-blog-go/handlers/categoryController.go:76 +0x140
+net/http.HandlerFunc.ServeHTTP(0x102813810?, {0x102aac678?, 0x1400022c0e0?}, 0x10297842c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x102aac678?, 0x1400022c0e0?}, 0x140002120e0?, {0x0?, 0x6fc23ac00?, 0x14000118000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x140002021e0, {0x102aac678, 0x1400022c0e0}, 0x1400023e100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x102aaba48?}, {0x102aac678, 0x1400022c0e0}, 0x1400023e100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x14000118000, {0x102aac8d0, 0x140002062a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/08 17:25:03 server.go:3197: http: panic serving [::1]:50374: runtime error: invalid memory address or nil pointer dereference
+goroutine 6 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x10494de00, 0x104b22c80})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editCategory(0x14000200000, {0x104994678, 0x140002061c0}, 0x1400021c100)
+	/Users/naof/go/src/project/tech-blog-go/handlers/categoryController.go:76 +0x140
+net/http.HandlerFunc.ServeHTTP(0x1046fb810?, {0x104994678?, 0x140002061c0?}, 0x10486042c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x104994678?, 0x140002061c0?}, 0x14000022100?, {0x0?, 0x6fc23ac00?, 0x1400007e140?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400007c060, {0x104994678, 0x140002061c0}, 0x1400021c100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x104993a48?}, {0x104994678, 0x140002061c0}, 0x1400021c100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400007e140, {0x1049948d0, 0x14000204150})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/08 17:25:45 server.go:3197: http: panic serving [::1]:50383: runtime error: invalid memory address or nil pointer dereference
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x102a05e00, 0x102bdac80})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editCategory(0x140001b2000, {0x102a4c678, 0x140001b41c0}, 0x140001d0100)
+	/Users/naof/go/src/project/tech-blog-go/handlers/categoryController.go:76 +0x140
+net/http.HandlerFunc.ServeHTTP(0x1027b3810?, {0x102a4c678?, 0x140001b41c0?}, 0x10291842c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x102a4c678?, 0x140001b41c0?}, 0x1400019a100?, {0x0?, 0x6fc23ac00?, 0x140001b01e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x102a4c678, 0x140001b41c0}, 0x140001d0100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x102a4ba48?}, {0x102a4c678, 0x140001b41c0}, 0x140001d0100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140001b01e0, {0x102a4c8d0, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
