@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS tags
 (
     id serial primary key,
     name varchar(64) not null unique,
+    slug varchar(64) not null unique,
     is_public boolean not null default false,
     position int unique,
     deleted_at timestamp default null,
@@ -10,5 +11,6 @@ CREATE TABLE IF NOT EXISTS tags
 );
 
 COMMENT ON COLUMN tags.name IS 'タグ名';
+COMMENT ON COLUMN tags.slug IS 'スラッグ名';
 COMMENT ON COLUMN tags.is_public IS '状態';
 COMMENT ON COLUMN tags.position IS '順序';

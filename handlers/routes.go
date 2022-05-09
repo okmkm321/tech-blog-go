@@ -21,5 +21,9 @@ func (app *Application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPost, "/tags", app.editTag)
 	router.HandlerFunc(http.MethodGet, "/tags/:id", app.getOneTag)
 	router.HandlerFunc(http.MethodDelete, "/tags/:id", app.deleteTag)
+	// ブログ
+	router.HandlerFunc(http.MethodGet, "/blogs", app.getAllBlogs)
+	router.HandlerFunc(http.MethodPost, "/blogs", app.editBlog)
+	router.HandlerFunc(http.MethodGet, "/blogs/:id", app.getOneBlog)
 	return router
 }

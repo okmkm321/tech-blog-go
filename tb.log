@@ -180,3 +180,348 @@ net/http.(*conn).serve(0x140001b01e0, {0x102a4c8d0, 0x1400018e2a0})
 	/usr/local/go/src/net/http/server.go:1966 +0x56c
 created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 00:02:16 server.go:3197: http: panic serving [::1]:52430: runtime error: invalid memory address or nil pointer dereference
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x10307a9c0, 0x103252c80})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+database/sql.(*Rows).Next(0x0)
+	/usr/local/go/src/database/sql/sql.go:2985 +0x28
+project/tech-blog-go/models.(*DBModel).BlogGetAll(0x140001b2040)
+	/Users/naof/go/src/project/tech-blog-go/models/adminBlogDb.go:152 +0x898
+project/tech-blog-go/handlers.(*Application).getAllBlogs(0x140001b2000, {0x1030c23c0, 0x140001b61c0}, 0x102ed18a0?)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:21 +0x38
+net/http.HandlerFunc.ServeHTTP(0x102e1f810?, {0x1030c23c0?, 0x140001b61c0?}, 0x102f8855c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x1030c23c0?, 0x140001b61c0?}, 0x1400019c0d8?, {0x0?, 0x6fc23ac00?, 0x25471f85d369?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x1030c23c0, 0x140001b61c0}, 0x140001c6100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x1400018e3f0?}, {0x1030c23c0, 0x140001b61c0}, 0x140001c6100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140001b01e0, {0x1030c2618, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:30:52 adminBlogController.go:72: parsing time "\"2022-05-10\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T"
+2022/05/09 04:37:16 server.go:3197: http: panic serving [::1]:53268: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x104f266e0, 0x140000a00f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140000c0000, {0x104f425c0, 0x140000c40e0}, 0x140000d2000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:87 +0x308
+net/http.HandlerFunc.ServeHTTP(0x104c9f810?, {0x104f425c0?, 0x140000c40e0?}, 0x104e0963c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x104f425c0?, 0x140000c40e0?}, 0x140000a0078?, {0x0?, 0x6fc23ac00?, 0x140000b41e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000090120, {0x104f425c0, 0x140000c40e0}, 0x140000d2000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x104f41990?}, {0x104f425c0, 0x140000c40e0}, 0x140000d2000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140000b41e0, {0x104f42818, 0x140000922a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:37:38 server.go:3197: http: panic serving [::1]:53275: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1023726e0, 0x1400019c0f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x10238e5c0, 0x140001b60e0}, 0x140001c6000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:87 +0x310
+net/http.HandlerFunc.ServeHTTP(0x1020eb810?, {0x10238e5c0?, 0x140001b60e0?}, 0x10225563c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x10238e5c0?, 0x140001b60e0?}, 0x1400019c078?, {0x0?, 0x6fc23ac00?, 0x140001b01e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x10238e5c0, 0x140001b60e0}, 0x140001c6000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x10238d990?}, {0x10238e5c0, 0x140001b60e0}, 0x140001c6000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140001b01e0, {0x10238e818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:38:09 server.go:3197: http: panic serving [::1]:53281: runtime error: index out of range [0] with length 0
+goroutine 21 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1043626e0, 0x140000a80c0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x1400009c000, {0x10437e5c0, 0x140000ac0e0}, 0x140000c8000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:88 +0x35c
+net/http.HandlerFunc.ServeHTTP(0x1040db810?, {0x10437e5c0?, 0x140000ac0e0?}, 0x10424563c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x10437e5c0?, 0x140000ac0e0?}, 0x140000a8048?, {0x0?, 0x6fc23ac00?, 0x14000098140?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000094120, {0x10437e5c0, 0x140000ac0e0}, 0x140000c8000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x10437d990?}, {0x10437e5c0, 0x140000ac0e0}, 0x140000c8000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x14000098140, {0x10437e818, 0x140000a4150})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:38:31 server.go:3197: http: panic serving [::1]:53287: runtime error: index out of range [0] with length 0
+goroutine 6 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1046266e0, 0x140001160a8})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x14000200000, {0x1046425c0, 0x14000144000}, 0x1400013a100)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:88 +0x310
+net/http.HandlerFunc.ServeHTTP(0x10439f810?, {0x1046425c0?, 0x14000144000?}, 0x10450963c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x1046425c0?, 0x14000144000?}, 0x14000116030?, {0x0?, 0x6fc23ac00?, 0x1400007e140?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400007c060, {0x1046425c0, 0x14000144000}, 0x1400013a100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x104641990?}, {0x1046425c0, 0x14000144000}, 0x1400013a100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400007e140, {0x104642818, 0x14000204150})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:39:37 server.go:3197: http: panic serving [::1]:53294: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x100a7a6e0, 0x140001240f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x1400010e050, {0x100a965c0, 0x1400013c0e0}, 0x14000152000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:88 +0x35c
+net/http.HandlerFunc.ServeHTTP(0x1007f3810?, {0x100a965c0?, 0x1400013c0e0?}, 0x10095d67c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x100a965c0?, 0x1400013c0e0?}, 0x14000124078?, {0x0?, 0x6fc23ac00?, 0x140001381e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x140001121e0, {0x100a965c0, 0x1400013c0e0}, 0x14000152000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x100a95990?}, {0x100a965c0, 0x1400013c0e0}, 0x14000152000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140001381e0, {0x100a96818, 0x140001162a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:40:24 server.go:3197: http: panic serving [::1]:53305: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x100b7a6e0, 0x140002120f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x14000232000, {0x100b965c0, 0x140002360e0}, 0x14000248000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:88 +0x35c
+net/http.HandlerFunc.ServeHTTP(0x1008f3810?, {0x100b965c0?, 0x140002360e0?}, 0x100a5d67c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x100b965c0?, 0x140002360e0?}, 0x14000212078?, {0x0?, 0x6fc23ac00?, 0x140002261e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000202120, {0x100b965c0, 0x140002360e0}, 0x14000248000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x100b95990?}, {0x100b965c0, 0x140002360e0}, 0x14000248000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140002261e0, {0x100b96818, 0x140002042a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:41:13 server.go:3197: http: panic serving [::1]:53315: runtime error: index out of range [0] with length 0
+goroutine 21 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x104e566e0, 0x140000a60c0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x1400009a000, {0x104e725d0, 0x140000aa0e0}, 0x140000c6000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:89 +0x3a8
+net/http.HandlerFunc.ServeHTTP(0x104bcf810?, {0x104e725d0?, 0x140000aa0e0?}, 0x104d3963c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x104e725d0?, 0x140000aa0e0?}, 0x140000a6048?, {0x0?, 0x6fc23ac00?, 0x14000096140?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000094060, {0x104e725d0, 0x140000aa0e0}, 0x140000c6000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x104e719a0?}, {0x104e725d0, 0x140000aa0e0}, 0x140000c6000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x14000096140, {0x104e72828, 0x140000a2150})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:42:02 server.go:3197: http: panic serving [::1]:53321: runtime error: index out of range [0] with length 0
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1031fa6e0, 0x14000018390})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x1032165c0, 0x1400020e000}, 0x140000a6000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:89 +0x3c0
+net/http.HandlerFunc.ServeHTTP(0x102f73810?, {0x1032165c0?, 0x1400020e000?}, 0x1030dd63c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x1032165c0?, 0x1400020e000?}, 0x14000018318?, {0x0?, 0x6fc23ac00?, 0x1400009e000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x1032165c0, 0x1400020e000}, 0x140000a6000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x103215990?}, {0x1032165c0, 0x1400020e000}, 0x140000a6000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400009e000, {0x103216818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:43:26 server.go:3197: http: panic serving [::1]:53330: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1043626e0, 0x1400019c0f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x10437e5c0, 0x140001b60e0}, 0x140001d0000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:89 +0x35c
+net/http.HandlerFunc.ServeHTTP(0x1040db810?, {0x10437e5c0?, 0x140001b60e0?}, 0x10424563c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x10437e5c0?, 0x140001b60e0?}, 0x1400019c078?, {0x0?, 0x6fc23ac00?, 0x140001b01e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x10437e5c0, 0x140001b60e0}, 0x140001d0000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x10437d990?}, {0x10437e5c0, 0x140001b60e0}, 0x140001d0000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140001b01e0, {0x10437e818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:44:11 server.go:3197: http: panic serving [::1]:53337: runtime error: index out of range [1] with length 0
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1003566e0, 0x14000018390})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x1003725c0, 0x14000218000}, 0x14000216000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:88 +0x35c
+net/http.HandlerFunc.ServeHTTP(0x1000cf810?, {0x1003725c0?, 0x14000218000?}, 0x10023963c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x1003725c0?, 0x14000218000?}, 0x14000018318?, {0x0?, 0x6fc23ac00?, 0x1400009e000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x1003725c0, 0x14000218000}, 0x14000216000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x100371990?}, {0x1003725c0, 0x14000218000}, 0x14000216000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400009e000, {0x100372818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:44:44 server.go:3197: http: panic serving [::1]:53344: runtime error: index out of range [0] with length 0
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x102d066e0, 0x14000018390})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x102d225c0, 0x1400020e000}, 0x140000a6000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:90 +0x3c0
+net/http.HandlerFunc.ServeHTTP(0x102a7f810?, {0x102d225c0?, 0x1400020e000?}, 0x102be963c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x102d225c0?, 0x1400020e000?}, 0x14000018318?, {0x0?, 0x6fc23ac00?, 0x1400009e000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x102d225c0, 0x1400020e000}, 0x140000a6000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x102d21990?}, {0x102d225c0, 0x1400020e000}, 0x140000a6000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400009e000, {0x102d22818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:45:01 server.go:3197: http: panic serving [::1]:53349: runtime error: index out of range [0] with length 0
+goroutine 25 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x102eae6e0, 0x14000144288})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x14000100640, {0x102eca5c0, 0x140001b20e0}, 0x140001c8000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:91 +0x408
+net/http.HandlerFunc.ServeHTTP(0x102c27810?, {0x102eca5c0?, 0x140001b20e0?}, 0x102d9163c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x102eca5c0?, 0x140001b20e0?}, 0x14000144210?, {0x0?, 0x6fc23ac00?, 0x1400012f680?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000128780, {0x102eca5c0, 0x140001b20e0}, 0x140001c8000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x102ec9990?}, {0x102eca5c0, 0x140001b20e0}, 0x140001c8000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400012f680, {0x102eca818, 0x14000115620})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:45:39 server.go:3197: http: panic serving [::1]:53356: runtime error: index out of range [1] with length 0
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x10240e6e0, 0x1400014c240})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x14000214000, {0x10242a5c0, 0x140001be000}, 0x140001ba000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:91 +0x408
+net/http.HandlerFunc.ServeHTTP(0x102187810?, {0x10242a5c0?, 0x140001be000?}, 0x1022f163c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x10242a5c0?, 0x140001be000?}, 0x1400014c1c8?, {0x0?, 0x6fc23ac00?, 0x140000a2000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400007c120, {0x10242a5c0, 0x140001be000}, 0x140001ba000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x102429990?}, {0x10242a5c0, 0x140001be000}, 0x140001ba000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140000a2000, {0x10242a818, 0x1400007e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:48:31 server.go:3197: http: panic serving [::1]:53378: runtime error: index out of range [0] with length 0
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x100a0a6e0, 0x140000a8078})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140001b2000, {0x100a265c0, 0x140000b8000}, 0x140000a6000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:87 +0x318
+net/http.HandlerFunc.ServeHTTP(0x100783810?, {0x100a265c0?, 0x140000b8000?}, 0x1008ed63c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x100a265c0?, 0x140000b8000?}, 0x140000a8000?, {0x0?, 0x6fc23ac00?, 0x1400009e000?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x1400018a1e0, {0x100a265c0, 0x140000b8000}, 0x140000a6000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x100a25990?}, {0x100a265c0, 0x140000b8000}, 0x140000a6000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x1400009e000, {0x100a26818, 0x1400018e2a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:49:11 server.go:3197: http: panic serving [::1]:53386: runtime error: index out of range [0] with length 0
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x1011fe6e0, 0x140000a20f0})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x140000b8000, {0x10121a5c0, 0x140000bc0e0}, 0x140000d2000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:89 +0x390
+net/http.HandlerFunc.ServeHTTP(0x100f77810?, {0x10121a5c0?, 0x140000bc0e0?}, 0x1010e163c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x10121a5c0?, 0x140000bc0e0?}, 0x140000a2078?, {0x0?, 0x6fc23ac00?, 0x140000b61e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x140000901e0, {0x10121a5c0, 0x140000bc0e0}, 0x140000d2000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x101219990?}, {0x10121a5c0, 0x140000bc0e0}, 0x140000d2000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140000b61e0, {0x10121a818, 0x140000942a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/09 04:51:32 server.go:3197: http: panic serving [::1]:53399: runtime error: index out of range [0] with length 0
+goroutine 9 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x10508e6e0, 0x140000183d8})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x1400007c5a0, {0x1050aa5c0, 0x1400020e0e0}, 0x1400021c100)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:89 +0x378
+net/http.HandlerFunc.ServeHTTP(0x104e07810?, {0x1050aa5c0?, 0x1400020e0e0?}, 0x104f7163c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x1050aa5c0?, 0x1400020e0e0?}, 0x14000018360?, {0x0?, 0x6fc23ac00?, 0x14000117540?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x14000112660, {0x1050aa5c0, 0x1400020e0e0}, 0x1400021c100)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x1050a9990?}, {0x1050aa5c0, 0x1400020e0e0}, 0x1400021c100)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x14000117540, {0x1050aa818, 0x1400007f620})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450

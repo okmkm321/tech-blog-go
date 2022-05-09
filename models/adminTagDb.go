@@ -8,6 +8,7 @@ import (
 type Tag struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`
+	Slug      string    `json:"slug"`
 	IsPublic  bool      `json:"is_public"`
 	Position  int       `json:"position"`
 	UpdatedAt time.Time `json:"-"`
@@ -18,7 +19,7 @@ func (m *DBModel) TagGetAll() ([]*Tag, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `select id, name, is_public, position from tags where tags.deleted_at is null order by position ASC`
+	query := `select id, name, slug, is_public, position from tags where tags.deleted_at is null order by position ASC`
 
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
@@ -32,6 +33,7 @@ func (m *DBModel) TagGetAll() ([]*Tag, error) {
 		err := rows.Scan(
 			&tag.ID,
 			&tag.Name,
+			&tag.Slug,
 			&tag.IsPublic,
 			&tag.Position,
 		)
@@ -48,7 +50,7 @@ func (m *DBModel) GetTag(id int) (*Tag, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `select id, name, is_public, position from tags where id = $1`
+	query := `select id, name, slug, is_public, position from tags where id = $1`
 
 	row := m.DB.QueryRowContext(ctx, query, id)
 
@@ -56,6 +58,7 @@ func (m *DBModel) GetTag(id int) (*Tag, error) {
 	err := row.Scan(
 		&t.ID,
 		&t.Name,
+		&t.Slug,
 		&t.IsPublic,
 		&t.Position,
 	)
@@ -74,10 +77,11 @@ func (m *DBModel) TagCreate(tag Tag) error {
 	if err != nil {
 		return err
 	}
-	query := `insert into tags (name, is_public, position) values ($1, $2, $3)`
+	query := `insert into tags (name, slug, is_public, position) values ($1, $2, $3, $4)`
 
 	_, err = m.DB.ExecContext(ctx, query,
 		tag.Name,
+		tag.Slug,
 		tag.IsPublic,
 		count,
 	)
@@ -94,10 +98,11 @@ func (m *DBModel) TagUpdate(tag Tag) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `update tags set name = $1, is_public = $2, updated_at = $3 where id = $4`
+	query := `update tags set name = $1, slug = $2, is_public = $3, updated_at = $4 where id = $5`
 
 	_, err := m.DB.ExecContext(ctx, query,
 		tag.Name,
+		tag.Slug,
 		tag.IsPublic,
 		tag.UpdatedAt,
 		tag.ID,
