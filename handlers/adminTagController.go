@@ -15,6 +15,7 @@ import (
 type TagPayload struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
+	Slug     string `json:"slug"`
 	IsPublic bool   `json:"is_public"`
 	Position int    `json:"position"`
 }
@@ -76,6 +77,7 @@ func (app *Application) editTag(w http.ResponseWriter, r *http.Request) {
 
 	tm.ID = tp.ID
 	tm.Name = tp.Name
+	tm.Slug = tp.Slug
 	tm.IsPublic = tp.IsPublic
 	tm.Position = tp.Position
 	tm.UpdatedAt = time.Now()
