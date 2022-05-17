@@ -45,6 +45,10 @@ type BlogContent struct {
 	Position int    `json:"position"`
 }
 
+type BlogEyeCatch struct {
+	Path string `json:"path"`
+}
+
 // all
 func (m *DBModel) BlogGetAll() ([]*Blog, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
