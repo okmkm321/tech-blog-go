@@ -525,3 +525,28 @@ net/http.(*conn).serve(0x14000117540, {0x1050aa818, 0x1400007f620})
 	/usr/local/go/src/net/http/server.go:1966 +0x56c
 created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3071 +0x450
+2022/05/11 00:49:35 adminBlogController.go:90: http: no such file
+2022/05/11 00:54:58 server.go:3197: http: superfluous response.WriteHeader call from project/tech-blog-go/handlers.(*Application).WriteJSON (server.go:61)
+2022/05/11 00:55:36 server.go:3197: http: superfluous response.WriteHeader call from project/tech-blog-go/handlers.(*Application).WriteJSON (server.go:61)
+2022/05/11 00:56:48 server.go:3197: http: superfluous response.WriteHeader call from project/tech-blog-go/handlers.(*Application).WriteJSON (server.go:61)
+2022/05/11 00:57:09 server.go:3197: http: superfluous response.WriteHeader call from project/tech-blog-go/handlers.(*Application).WriteJSON (server.go:61)
+2022/05/11 03:12:55 server.go:3197: http: panic serving [::1]:50389: runtime error: index out of range [1] with length 1
+goroutine 36 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1825 +0xb0
+panic({0x10084af20, 0x140000a2270})
+	/usr/local/go/src/runtime/panic.go:844 +0x258
+project/tech-blog-go/handlers.(*Application).editBlog(0x756a0fe45?, {0x100866fe0, 0x140000bc0e0}, 0x140000d2000)
+	/Users/naof/go/src/project/tech-blog-go/handlers/adminBlogController.go:99 +0x88c
+net/http.HandlerFunc.ServeHTTP(0x1005bfdd0?, {0x100866fe0?, 0x140000bc0e0?}, 0x10071a91c?)
+	/usr/local/go/src/net/http/server.go:2084 +0x3c
+github.com/julienschmidt/httprouter.(*Router).Handler.func1({0x100866fe0?, 0x140000bc0e0?}, 0x140000a2078?, {0x0?, 0x6fc23ac00?, 0x140000b61e0?})
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:275 +0x2a8
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0x140000901e0, {0x100866fe0, 0x140000bc0e0}, 0x140000d2000)
+	/Users/naof/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x744
+net/http.serverHandler.ServeHTTP({0x1008663b0?}, {0x100866fe0, 0x140000bc0e0}, 0x140000d2000)
+	/usr/local/go/src/net/http/server.go:2916 +0x3fc
+net/http.(*conn).serve(0x140000b61e0, {0x100867238, 0x140000942a0})
+	/usr/local/go/src/net/http/server.go:1966 +0x56c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3071 +0x450
