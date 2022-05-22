@@ -201,7 +201,7 @@ func (app *Application) eyeCatchUpload(w http.ResponseWriter, r *http.Request) {
 	newFile := strings.Join(fileAry, ".")
 
 	uploader := s3manager.NewUploader(sess)
-	_, err = uploader.Upload(&s3manager.UploadInput{
+	uploadData, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(ab),
 		Key:    aws.String("eyecatch/" + newFile),
 		Body:   file,
@@ -210,5 +210,11 @@ func (app *Application) eyeCatchUpload(w http.ResponseWriter, r *http.Request) {
 		app.ErrorJSON(w, err)
 		return
 	}
-	fmt.Println(uploader)
+
+	err = app.WriteJSON(w, http.StatusOK, uploadData.Location, "image")
+
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
 }
