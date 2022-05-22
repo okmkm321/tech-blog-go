@@ -55,7 +55,7 @@ func (m *DBModel) BlogGetAll() ([]*Blog, error) {
 	defer cancel()
 
 	query := `SELECT
-				id, title, description, eye_catch, body, state, publish_at
+				id, user_id, title, description, eye_catch, body, state, publish_at
 			FROM 
 				blogs 
 			WHERE
@@ -74,6 +74,7 @@ func (m *DBModel) BlogGetAll() ([]*Blog, error) {
 		var b Blog
 		err := rows.Scan(
 			&b.ID,
+			&b.UserID,
 			&b.Title,
 			&b.Description,
 			&b.EyeCatch,
